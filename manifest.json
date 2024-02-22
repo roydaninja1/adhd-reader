@@ -1,0 +1,8 @@
+{
+    "name": "ADHD Reader",
+    "version": "0.1.0",
+    "description": "extension to help people with adhd read long texts",
+    "permissions": ["tabs"],
+    "content-scripts": "contentScript.js",
+    "action":{ "default-popup": "popup.html" }
+}
