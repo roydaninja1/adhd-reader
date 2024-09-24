@@ -1,0 +1,23 @@
+{
+   "action": {
+      "default-icon": {
+         "128": "icon128.png"
+      }
+   },
+   "background": {
+      "service_worker": "service-worker.js"
+   },
+   "content_scripts": [ {
+      "js": [ "script.js" ],
+      "matches": [ "\u003Call_urls>" ]
+   } ],
+   "description": "An extension to help people with adhd read",
+   "icons": {
+      "128": "icon128.png"
+   },
+   "manifest_version": 3,
+   "name": "ADHD reader",
+   "permissions": [ "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.1.0"
+}
