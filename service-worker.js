@@ -1,3 +1,8 @@
+chrome.runtime.onInstalled.addListener(function (object) {
+    // if (object.reason === chrome.runtime.OnInstalledReason.install) {
+    chrome.tabs.create({"url" : chrome.runtime.getURL("install.html")}, )
+    // }
+});
 
 chrome.action.onClicked.addListener(function() {
     chrome.action.setBadgeBackgroundColor({"color" : "white"});

@@ -1,26 +1,24 @@
 {
-    "manifest_version" : 3,
-    "name" : "ADHD reader",
-    "version" : "2.0.0",
-    "description" : "An extension to help people with adhd read lots of words",
-    "content_scripts" : [
-        {
-            "matches" : ["<all_urls>"],
-            "js" : ["script.js"]
-        }
-    ],
-    "action" : {
-        "default-icon" : {
-            "128" : "icon128.png"
-        }
-    },
-    "permissions" : [
-        "storage"
-    ],
-    "icons" : {
-        "128" : "icon128.png"
-    },
-    "background" : {
-        "service_worker" : "service-worker.js"
-    }
+   "action": {
+      "default-icon": {
+         "128": "icon128.png"
+      }
+   },
+   "background": {
+      "service_worker": "service-worker.js"
+   },
+   "content_scripts": [ {
+      "js": [ "script.js" ],
+      "matches": [ "\u003Call_urls>" ]
+   } ],
+   "description": "An extension to help people with adhd read lots of words",
+   "icons": {
+      "128": "icon128.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqkCgTdaTtVVqYf3oQ9rEN20uOlJd2177J6r//kcz0NXCdRcavZwGjhroe7DHhMXXNwDo7cX7TekGzH7kpnb/VNG//y/8krURRTehhrBgf9jJoWY9ysn+XM5WBcyDVhLem38R8PYeDoQyi1e7n7PbC55p7PibxLwNADJ0wzz8MLCalSP28Bkzy35wys7nh8+idK6XQPYsd53ClSbfuDnvSBNByT1flwDJ5h+mBGhlxPo94nT9AudLmqvrkhkPvRt3DuOAC040U3L8ioFVrr8pRZ6chY/q69f7v81rZxScBpMvPKFkLVAAFgYu3RJB06Joq8Nsb0itBK1/yu8JnLmqOwIDAQAB",
+   "manifest_version": 3,
+   "name": "ADHD reader",
+   "permissions": [ "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.0.0"
 }
