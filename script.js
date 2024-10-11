@@ -3,10 +3,7 @@ function get_text() {
         document.body,
         NodeFilter.SHOW_TEXT,
         function(node) {
-            if (/^\s*$/.test(node.nodeValue)) {
-                return NodeFilter.FILTER_REJECT;
-            }
-            else if (node.parentElement.tagName === "SCRIPT" || node.parentElement.tagName === "STYLE") {
+            if (/^\s*$/.test(node.nodeValue) ||node.parentElement.tagName === "SCRIPT" || node.parentElement.tagName === "STYLE") {
                 return NodeFilter.FILTER_REJECT;
             }
             return NodeFilter.FILTER_ACCEPT;
@@ -24,7 +21,6 @@ function get_text() {
 
 function bolden() {
     var text = get_text();
-    console.log(text);
     for (var i = 0; i < text.length; i++) {
         var word_array = text[i].nodeValue.split(" ");
         var new_text = '';
@@ -55,9 +51,17 @@ function bolden() {
         span.innerHTML = new_text;
         text[i].parentNode.replaceChild(span, text[i]); // replaces the entire text node with a span containing one word. maybe change to appending newtext instead of setting it
     }
+    var openSans = document.createElement("link");
+    openSans.href = "https://fonts.googleapis.com/css?family=Open Sans";
+    openSans.rel = "stylesheet";
+    document.head.appendChild(openSans);
+    var boldWeight = document.createElement("style");
+    boldWeight.innerHTML = "body {font-family: 'Open Sans'; font-weight: 500} .ADHD-boldened b {font-weight: 600}";
+    document.head.appendChild(boldWeight);
+
 }
 
-window.onload = function(){
+window.onload = function() {
     chrome.storage.local.get(["on"]).then(function(result) {
         if (result["on"] == true) {
             bolden();
@@ -67,3 +71,9 @@ window.onload = function(){
         }
     });
 };
+
+chrome.storage.onChanged.addListener(function(object, areaName){
+    if (object.on.newValue == true) {
+        bolden();
+    }
+})
