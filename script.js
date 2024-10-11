@@ -22,50 +22,41 @@ function get_text() {
     return text_nodes;
 }
 
-function append_div(first_half, second_half, element) {
-    let span = document.createElement("span");
-    span.style.fontWeight = "bold";
-    span.textContent = first_half;
-    let norm = document.createTextNode(second_half);
-    element.appendChild(span);
-    element.appendChild(norm);
-}
-
 function bolden() {
     var text = get_text();
+    console.log(text);
     for (var i = 0; i < text.length; i++) {
-        // console.log({text: text[i].nodeValue, parent : text[i].parentElement});
-        var div = document.createElement("div");
         var word_array = text[i].nodeValue.split(" ");
+        var new_text = '';
         for (var w = 0; w < word_array.length; w++) {
+            if (w != 0) {
+                new_text += " ";
+            }
             var chars = Array.from(word_array[w]);
-            if (chars.length == 1) {
-                append_div(chars, ' ', div);
+            if (chars.length == 1) {    
+                new_text += chars;
                 continue;
             }
             if (chars.length % 2 == 0) {
                 var middle = (chars.length) / 2;
                 let first_half = chars.slice(0, middle).join('');
                 let second_half = chars.slice(-middle).join('');
-                second_half += " ";
-                append_div(first_half, second_half, div);
+                new_text += "<b>" + first_half + "</b>" + second_half;
             }
             else {
                 var middle2 = (chars.length + 1) / 2;
                 let first_half2 = chars.slice(0, middle2).join('');
                 let second_half2 = chars.slice(-(middle2 - 1)).join('');
-                second_half2 += " ";
-                append_div(first_half2, second_half2, div);
+                new_text += "<b>" + first_half2 + "</b>" + second_half2;
             }
         }
-        div.style.all = "unset";
-        div.style.display = text[i].parentElement.style.display;
-        text[i].parentNode.replaceChild(div, text[i]);
+        var span = document.createElement("span");
+        span.className = "ADHD-boldened";
+        span.innerHTML = new_text;
+        text[i].parentNode.replaceChild(span, text[i]); // replaces the entire text node with a span containing one word. maybe change to appending newtext instead of setting it
     }
 }
 
-// get_text();
-// console.log(document.body.childNodes);
 window.onload = function(){
     chrome.storage.local.get(["on"]).then(function(result) {
         if (result["on"] == true) {
