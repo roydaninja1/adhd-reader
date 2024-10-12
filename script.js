@@ -19,36 +19,43 @@ function get_text() {
     return text_nodes;
 }
 
+function combineWord(first_half, second_half, element) {
+    var boldText = document.createElement("b");
+    boldText.text = first_half;
+    var normalText = document.createTextNode(second_half);
+    element.appendChild(boldText, normalText);
+}
+
 function bolden() {
     var text = get_text();
     for (var i = 0; i < text.length; i++) {
+        var span = document.createElement("span");
         var word_array = text[i].nodeValue.split(" ");
-        var new_text = '';
         for (var w = 0; w < word_array.length; w++) {
-            if (w != 0) {
-                new_text += " ";
-            }
             var chars = Array.from(word_array[w]);
+            if (w != 0) {
+                var space = [" "];
+                chars = space.concat(chars);
+            }
             if (chars.length == 1) {    
-                new_text += chars;
+                var boldLetter = document.createElement("b");
+                span.appendChild(boldLetter);
                 continue;
             }
             if (chars.length % 2 == 0) {
                 var middle = (chars.length) / 2;
                 let first_half = chars.slice(0, middle).join('');
                 let second_half = chars.slice(-middle).join('');
-                new_text += "<b>" + first_half + "</b>" + second_half;
+                combineWord(first_half, second_half, span);
             }
             else {
                 var middle2 = (chars.length + 1) / 2;
                 let first_half2 = chars.slice(0, middle2).join('');
                 let second_half2 = chars.slice(-(middle2 - 1)).join('');
-                new_text += "<b>" + first_half2 + "</b>" + second_half2;
+                combineWord(first_half2 + second_half2, span);
             }
         }
-        var span = document.createElement("span");
         span.className = "ADHD-boldened";
-        span.innerHTML = new_text;
         text[i].parentNode.replaceChild(span, text[i]); // replaces the entire text node with a span containing one word. maybe change to appending newtext instead of setting it
     }
     var boldWeight = document.createElement("style");
