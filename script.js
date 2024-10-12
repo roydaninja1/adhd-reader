@@ -21,9 +21,10 @@ function get_text() {
 
 function combineWord(first_half, second_half, element) {
     var boldText = document.createElement("b");
-    boldText.text = first_half;
+    boldText.textContent = first_half;
     var normalText = document.createTextNode(second_half);
-    element.appendChild(boldText, normalText);
+    element.appendChild(boldText);
+    element.appendChild(normalText);
 }
 
 function bolden() {
@@ -39,6 +40,7 @@ function bolden() {
             }
             if (chars.length == 1) {    
                 var boldLetter = document.createElement("b");
+                boldLetter.textContent = chars;
                 span.appendChild(boldLetter);
                 continue;
             }
@@ -52,17 +54,22 @@ function bolden() {
                 var middle2 = (chars.length + 1) / 2;
                 let first_half2 = chars.slice(0, middle2).join('');
                 let second_half2 = chars.slice(-(middle2 - 1)).join('');
-                combineWord(first_half2 + second_half2, span);
+                combineWord(first_half2, second_half2, span);
             }
         }
         span.className = "ADHD-boldened";
         text[i].parentNode.replaceChild(span, text[i]); // replaces the entire text node with a span containing one word. maybe change to appending newtext instead of setting it
     }
-    var boldWeight = document.createElement("style");
-    boldWeight.innerHTML = "body {font-family: Arial, sans-serif; font-weight: 500} .ADHD-boldened b {font-weight: 600}";
-    document.head.appendChild(boldWeight);
-
+    // var boldWeight = document.createElement("style");
+    // boldWeight.innerHTML = "body {font-family: Arial, sans-serif; font-weight: 500} .ADHD-boldened b {font-weight: 600}";
+    // document.head.appendChild(boldWeight);
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (chrome.storage.local.get(["on"]) == true) {
+        document.body.style.fontFamily = "Arial, sans-serif";
+    }
+})
 
 window.onload = function() {
     chrome.storage.local.get(["on"]).then(function(result) {
