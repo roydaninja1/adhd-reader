@@ -51,12 +51,8 @@ function bolden() {
         span.innerHTML = new_text;
         text[i].parentNode.replaceChild(span, text[i]); // replaces the entire text node with a span containing one word. maybe change to appending newtext instead of setting it
     }
-    var openSans = document.createElement("link");
-    openSans.href = "https://fonts.googleapis.com/css?family=Open Sans";
-    openSans.rel = "stylesheet";
-    document.head.appendChild(openSans);
     var boldWeight = document.createElement("style");
-    boldWeight.innerHTML = "body {font-family: 'Open Sans'; font-weight: 500} .ADHD-boldened b {font-weight: 600}";
+    boldWeight.innerHTML = "body {font-family: Arial, sans-serif; font-weight: 500} .ADHD-boldened b {font-weight: 600}";
     document.head.appendChild(boldWeight);
 
 }
