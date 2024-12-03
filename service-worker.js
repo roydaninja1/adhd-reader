@@ -16,7 +16,7 @@ chrome.action.onClicked.addListener(function() {
         else {
             chrome.storage.local.set({"on" : true});
             chrome.action.setBadgeText({"text" : "On"});
-            chrome.tabs.reload();
+            document.body.innerHTML = document.body.innerHTML;
         }
     })
 });
