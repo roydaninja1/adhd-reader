@@ -23,8 +23,8 @@ function get_text() {
 }
 
 function append_div(first_half, second_half, element) {
-    let span = document.createElement("span");
-    span.style.fontWeight = "bold";
+    let span = document.createElement("b");
+    // span.style.fontWeight = "bold";
     span.textContent = first_half;
     let norm = document.createTextNode(second_half);
     element.appendChild(span);
@@ -35,7 +35,7 @@ function bolden() {
     var text = get_text();
     for (var i = 0; i < text.length; i++) {
         // console.log({text: text[i].nodeValue, parent : text[i].parentElement});
-        var div = document.createElement("div");
+        var div = document.createElement("span");
         var word_array = text[i].nodeValue.split(" ");
         for (var w = 0; w < word_array.length; w++) {
             var chars = Array.from(word_array[w]);
