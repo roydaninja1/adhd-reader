@@ -59,7 +59,6 @@ function bolden() {
             }
         }
         div.style.all = "unset";
-        div.style.fontFamily = "Arial, sans-serif";
         div.style.display = text[i].parentElement.style.display;
         text[i].parentNode.replaceChild(div, text[i]);
     }
@@ -71,7 +70,7 @@ window.onload = function(){
     chrome.storage.local.get(["on"]).then(function(result) {
         if (result["on"] == true) {
             bolden();
-            document.body.style.fontFamily = "Arial, Sans-serif";
+            document.body.style.fontFamily = "Arial";
         }
         else {
             ;
