@@ -11,7 +11,7 @@
       "js": [ "script.js" ],
       "matches": [ "\u003Call_urls>" ]
    } ],
-   "description": "An extension to help people with adhd read",
+   "description": "A lightweight extension to help people with ADHD read.",
    "icons": {
       "128": "icon128.png"
    },

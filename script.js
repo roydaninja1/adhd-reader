@@ -33,14 +33,15 @@ function append_div(first_half, second_half, element) {
 
 function bolden() {
     var text = get_text();
+    var frag = document.createDocumentFragment();
     for (var i = 0; i < text.length; i++) {
         // console.log({text: text[i].nodeValue, parent : text[i].parentElement});
-        var div = document.createElement("span");
+        var span = document.createElement("span");
         var word_array = text[i].nodeValue.split(" ");
         for (var w = 0; w < word_array.length; w++) {
             var chars = Array.from(word_array[w]);
             if (chars.length == 1) {
-                append_div(chars, ' ', div);
+                append_div(chars, ' ', span);
                 continue;
             }
             if (chars.length % 2 == 0) {
@@ -48,21 +49,22 @@ function bolden() {
                 let first_half = chars.slice(0, middle).join('');
                 let second_half = chars.slice(-middle).join('');
                 second_half += " ";
-                append_div(first_half, second_half, div);
+                append_div(first_half, second_half, span);
             }
             else {
                 var middle2 = (chars.length + 1) / 2;
                 let first_half2 = chars.slice(0, middle2).join('');
                 let second_half2 = chars.slice(-(middle2 - 1)).join('');
                 second_half2 += " ";
-                append_div(first_half2, second_half2, div);
+                append_div(first_half2, second_half2, span);
             }
         }
-        div.style.all = "unset";
-        div.style.display = text[i].parentElement.style.display;
-        text[i].parentNode.replaceChild(div, text[i]);
+        span.style.display = text[i].parentElement.style.display;
+        text[i].parentNode.replaceChild(span, text[i]);
     }
+    document.body.appendChild(frag);
 }
+// see if i can put the <b> tags directly in the text node without needing a new span for every word
 
 // get_text();
 // console.log(document.body.childNodes);
