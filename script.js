@@ -33,7 +33,6 @@ function append_div(first_half, second_half, element) {
 
 function bolden() {
     var text = get_text();
-    var frag = document.createDocumentFragment();
     for (var i = 0; i < text.length; i++) {
         // console.log({text: text[i].nodeValue, parent : text[i].parentElement});
         var span = document.createElement("span");
@@ -62,7 +61,6 @@ function bolden() {
         span.style.display = text[i].parentElement.style.display;
         text[i].parentNode.replaceChild(span, text[i]);
     }
-    document.body.appendChild(frag);
 }
 // see if i can put the <b> tags directly in the text node without needing a new span for every word
 
@@ -71,8 +69,8 @@ function bolden() {
 window.onload = function(){
     chrome.storage.local.get(["on"]).then(function(result) {
         if (result["on"] == true) {
-            bolden();
             document.body.style.fontFamily = "Arial";
+            bolden();
         }
         else {
             ;
