@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(function (object) {
-    // if (object.reason === chrome.runtime.OnInstalledReason.install) {
-    chrome.tabs.create({"url" : chrome.runtime.getURL("install.html")}, )
-    // }
+    if (object.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+        chrome.tabs.create({"url" : chrome.runtime.getURL("install.html")}, )
+    }
 });
 
 chrome.action.onClicked.addListener(function() {
