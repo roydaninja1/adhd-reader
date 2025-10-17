@@ -19,5 +19,5 @@
    "name": "ADHD reader",
    "permissions": [ "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2.2.0"
+   "version": "2.2.1"
 }
